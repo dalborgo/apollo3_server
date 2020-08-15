@@ -2,14 +2,16 @@ const express = require('express')
 const { ApolloServer, gql } = require('apollo-server-express')
 
 const typeDefs = gql`
-  type Query {
-    hello: String
-    product(id: ID!): Product
-  }
-  type Product {
-    name: String
-    price: Int
-  }
+    directive @client on FIELD_DEFINITION
+    type Query {
+        hello: String
+        product(id: ID!): Product
+        products: [Product]
+    }
+    type Product {
+        name: String
+        price: Int
+    }
 `
 
 const resolvers = {
@@ -20,6 +22,17 @@ const resolvers = {
         name: 'jjj',
         price: 12,
       }
+    },
+    products: (_, { args }) => {
+      return [{
+        name: 'jjj',
+        price: 12,
+      },
+        {
+          name: 'j3jj',
+          price: 132,
+        }
+      ]
     },
   },
 }
