@@ -2,37 +2,36 @@ const { log } = require('./log')
 const express = require('express')
 const { ApolloServer, gql } = require('apollo-server-express')
 const typeDefs = gql`
-    directive @client on FIELD_DEFINITION
-    type Query {
-        hello: String
-        product(id: ID!): Product
-        products: [Product]
-        favoriteBook: Book
-    }
-    type Mutation {
-        changeBook(input: EditBookInput!): Book
-    }
-    type Product {
-        name: String
-        price: Int
-    }
-    type Book {
-        isbn: ID!
-        title: String
-        author: Author
-    }
-    type Author {
-        language: String
-        name: String
-    }
-    input EditBookInput {
-        title: String
-        author: AuthorInput
-    }
-    input AuthorInput {
-        language: String
-        name: String
-    }
+  type Query {
+    hello: String
+    product(id: ID!): Product
+    products: [Product]
+    favoriteBook: Book
+  }
+  type Mutation {
+    changeBook(input: EditBookInput!): Book
+  }
+  type Product {
+    name: String
+    price: Int
+  }
+  type Book {
+    isbn: ID!
+    title: String
+    author: Author
+  }
+  type Author {
+    language: String
+    name: String
+  }
+  input EditBookInput {
+    title: String
+    author: AuthorInput
+  }
+  input AuthorInput {
+    language: String
+    name: String
+  }
 `
 
 const book_1 = {
@@ -40,8 +39,8 @@ const book_1 = {
   title: 'Il Giovane Holden',
   author: {
     language: 'en',
-    name: 'David Jerome Sallinger'
-  }
+    name: 'David Jerome Sallinger',
+  },
 }
 
 const resolvers = {
@@ -62,14 +61,15 @@ const resolvers = {
       return book_1
     },
     products: (_, { args }) => {
-      return [{
-        name: 'jjj',
-        price: 12,
-      },
+      return [
+        {
+          name: 'jjj',
+          price: 12,
+        },
         {
           name: 'j3jj',
           price: 132,
-        }
+        },
       ]
     },
   },
