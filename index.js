@@ -9,34 +9,37 @@ const typeDefs = gql`
     favoriteBook: Book
   }
   type Mutation {
-    changeBook(input: EditBookInput!): Book
+      changeBook(input: EditBookInput!): Book
   }
   type Product {
-    name: String
-    price: Int
+      name: String
+      price: Int
   }
   type Book {
-    isbn: ID!
-    title: String
-    author: Author
+      isbn: ID!
+      title: String
+      numeri: [Int]
+      author: Author
   }
   type Author {
-    language: String
-    name: String
+      language: String
+      name: String
   }
   input EditBookInput {
-    title: String
-    author: AuthorInput
+      title: String
+      numeri: [Int]
+      author: AuthorInput
   }
   input AuthorInput {
-    language: String
-    name: String
+      language: String
+      name: String
   }
 `
 
 const book_1 = {
   isbn: 'long_id',
   title: 'Il Giovane Holden',
+  numeri: [12, 34],
   author: {
     language: 'en',
     name: 'David Jerome Sallinger',
